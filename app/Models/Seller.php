@@ -27,6 +27,7 @@ class Seller extends Authenticatable
         'address',
         'payment_method',
         'payment_email',
+        'verified',
        'status',
     ];
     public function image()
