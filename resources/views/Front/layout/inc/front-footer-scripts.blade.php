@@ -1,0 +1,20 @@
+<script src="/front/js/jquery-3.6.0.min.js"></script>
+    <script src="/front/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="/front/js/bootstrap/bootstrap-notify.min.js"></script>
+    <script src="/front/js/bootstrap/popper.min.js"></script>
+    <script src="/front/js/jquery-ui.min.js"></script>
+    <script src="/front/js/feather/feather.min.js"></script>
+    <script src="/front/js/feather/feather-icon.js"></script>
+    <script src="/front/js/lazysizes.min.js"></script>
+    <script src="/front/js/slick/slick.js"></script>
+    <script src="/front/js/slick/slick-animation.min.js"></script>
+    <script src="/front/js/slick/custom_slick.js"></script>
+    <script src="/front/js/auto-height.js"></script>
+    <script src="/front/js/timer.js"></script>
+    <script src="/front/js/fly-cart.js"></script>
+    <script src="/front/js/quantity-2.js"></script>
+    <script src="/front/js/wow.min.js"></script>
+    <script src="/front/js/custom-wow.js"></script>
+    <script src="/front/js/script.js"></script>
+    <script src="/front/js/settings.js"></script>
+    @stack('scripts')
