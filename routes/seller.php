@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Seller\SellerController;
+use App\Http\Controllers\Seller\SellerForgetPasswordController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('seller/')->name('seller.')->group(function () {
-    Route::middleware([])->group(function () {
+    Route::middleware(['guest:seller'])->group(function () {
         Route::controller(SellerController::class)->group(function () {
             Route::get('login', 'create')->name('login');
             Route::post('login', 'store')->name('store-login');
@@ -24,10 +25,15 @@ Route::prefix('seller/')->name('seller.')->group(function () {
             Route::get('register-success', 'registerSuccess')->name('register-success');
             Route::get('verify-seller/{token}/{email}', 'verify')->name('verify');
         });
+        Route::get('forget-seller-password', [SellerForgetPasswordController::class, 'create'])->name('forget-seller-password');
+        Route::post('send-password-rest-link', [SellerForgetPasswordController::class, 'sendPasswordRestLink'])->name('send-password-rest-link');
+        Route::get('password/reset/{email}/{token}', [SellerForgetPasswordController::class, 'resetPassword'])->name('resetPassword');
+        Route::post('password/reset/{token}', [SellerForgetPasswordController::class, 'resetPasswordHandler'])->name('resetPasswordHandler');
     });//end middleware Guest Group
-    Route::middleware([])->group(function () {
+    Route::middleware(['auth:seller'])->group(function () {
         Route::controller(SellerController::class)->group(function () {
             Route::get('home','index')->name('home');
+            Route::post('logout','destroy')->name('logout');
         });
     });//end middleware seller Group
 });

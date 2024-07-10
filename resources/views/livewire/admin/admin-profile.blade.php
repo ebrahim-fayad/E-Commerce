@@ -26,7 +26,11 @@
 							<a class="dropdown-item" href="#!" onclick="event.preventDefault();document.getElementById('logoutform').submit();"
 								><i class="dw dw-logout"></i> Log Out</a
 							>
+                            @if (auth()->guard('admin')->check())
                             <form action="{{ route('admin.logout') }}" method="post" id="logoutform">@csrf</form>
+                            @else
+                            <form action="{{ route('seller.logout') }}" method="post" id="logoutform">@csrf</form>
+                            @endif
 						</div>
 					</div>
 				</div>

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -10,7 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Seller extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable,Sluggable;
 
     /**
      * The attributes that are mass assignable.
@@ -30,6 +32,14 @@ class Seller extends Authenticatable
         'verified',
        'status',
     ];
+    public function sluggable(): array
+    {
+        return [
+            'username' => [
+                'source' => 'name'
+            ]
+        ];
+    }
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
@@ -54,4 +64,13 @@ class Seller extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function getPictureAttribute($value)
+    {
+        if ($value) {
+            return asset('images/users/sellers/' . $value);
+        } else {
+            return asset('images/default-avatar.png');
+        }
+
+    }
 }

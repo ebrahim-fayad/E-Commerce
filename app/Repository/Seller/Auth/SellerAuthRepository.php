@@ -6,10 +6,13 @@ use App\Mail\SentVerificationEmail;
 use App\Models\Seller;
 use App\Models\VerificationToken;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class SellerAuthRepository implements SellerAuthRepositoryInterface
 {
@@ -59,23 +62,87 @@ class SellerAuthRepository implements SellerAuthRepositoryInterface
         return view('Back.pages.Sellers.Auth.seller-login');
     }
 
+    public function store($request)
+    {
+        $this->ensureIsNotRateLimited($request);
+        return $this->authenticate($request);
+    }
+    public function authenticate($request)
+    {
+        $fieldType = filter_var($request->login_id, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+        if ($fieldType == 'email') {
+            $request->validate([
+                'login_id' => 'required|email|exists:sellers,email',
+                'password' => 'required|min:5|max:45'
+            ], [
+                'login_id.required' => 'Email or Username is required.',
+                'login_id.email' => 'Invalid email address.',
+                'login_id.exists' => 'Email is not exists in system.',
+                'password.required' => 'Password is required'
+            ]);
+        } else {
+            $request->validate([
+                'login_id' => 'required|exists:sellers,username',
+                'password' => 'required|min:5|max:45'
+            ], [
+                'login_id.required' => 'Email or Username is required.',
+                'login_id.exists' => 'Username is not exists in system.',
+                'password.required' => 'Password is required'
+            ]);
+        }
+
+        $cred = [
+            $fieldType => $request->login_id,
+            'password' => $request->password
+        ];
+
+        $remember = $request->has('remember');
+
+        if (Auth::guard('seller')->attempt($cred, $remember)) {
+            RateLimiter::clear($this->throttleKey($request)); // Clear rate limiter on successful login
+            if (!auth('seller')->user()->verified) {
+                auth('seller')->logout();
+                return redirect()->route('seller.login')->with('fail', 'Your account is not verified. Check in your email and click on the link we had sent in order to verify your email for seller account.');
+            } else {
+                return redirect()->route('seller.home');
+            }
+        } else {
+            RateLimiter::hit($this->throttleKey($request)); // Increment rate limiter on failed login
+            session()->flash('fail', 'Incorrect credentials');
+            return back();
+        }
+    }
+    protected function ensureIsNotRateLimited($request)
+    {
+        if (RateLimiter::tooManyAttempts($this->throttleKey($request), 5)) {
+            $seconds = RateLimiter::availableIn($this->throttleKey($request));
+            session(['retry_after' => $seconds]);
+            throw ValidationException::withMessages([
+            ])->status(429);
+        } else {
+            session()->forget('retry_after');
+        }
+    }
+
+    protected function throttleKey($request)
+    {
+        return Str::lower($request->input('login_id')) . '|' . $request->ip();
+    }
+
     /**
      * @inheritDoc
      */
     public function destroy($request) {
+        Auth::guard('seller')->logout();
+
+        $request->session()->forget('guard.seller');
+
+        $request->session()->regenerateToken();
+        session()->flash('success', 'You are logged out successfully');
+        return to_route('seller.login');
+
     }
-
-
-
-    /**
-     * @inheritDoc
-     */
-    public function store($request) {
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function verify($token, $email) {
         $verifyToken = VerificationToken::where('token', $token)->first();
 

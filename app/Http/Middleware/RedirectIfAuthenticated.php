@@ -25,6 +25,10 @@ class RedirectIfAuthenticated
 
                     return to_route('admin.home');
                 }
+                if ($guard == 'seller') {
+
+                    return to_route('seller.home');
+                }
                 return redirect(RouteServiceProvider::HOME);
             }
         }

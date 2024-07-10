@@ -37,5 +37,13 @@ class SellerController extends Controller
     {
         return $this->Seller->verify($token,$email);
     }
+    public function store(Request $request)
+    {
+       return $this->Seller->store($request);
+    }
+    public function destroy(Request $request)
+    {
+        return $this->Seller->destroy($request);
+    }
 
 }

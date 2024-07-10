@@ -25,3 +25,7 @@ if (!function_exists('categories')) {
         return $categories;
     }
 }
+class constDefaults
+{
+    const tokenExpiredMinutes = 15;
+}
