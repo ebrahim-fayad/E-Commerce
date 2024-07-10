@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="{{ asset('extra-assets/jquery-ui-1.13.2/jquery-ui.min.css') }}">
 <link rel="stylesheet" href="{{ asset('extra-assets/jquery-ui-1.13.2/jquery-ui.structure.min.css') }}">
 <link rel="stylesheet" href="{{ asset('extra-assets/jquery-ui-1.13.2/jquery-ui.theme.min.css') }}">
+<link rel="stylesheet" href="{{ asset('back/sweet-alert.min.css') }}">
 <script>
     (function(w, d, s, l, i) {
         w[l] = w[l] || [];
@@ -36,5 +37,7 @@
 <link rel="stylesheet" href="{{ asset('extra-assets/ijaboCropTool/ijaboCropTool.min.css') }}">
 @stack('stylesheets')
 <!-- End Google Tag Manager -->
-<link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+@kropifyStyles
+

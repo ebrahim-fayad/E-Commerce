@@ -9,6 +9,7 @@ use App\Interfaces\Admin\Profile\AdminProfileRepositoryInterface;
 use App\Interfaces\Admin\Settings\SettingRepositoryInterface;
 use App\Interfaces\Seller\Auth\SellerAuthRepositoryInterface;
 use App\Interfaces\Seller\Auth\SellerForgetPasswordRepositoryInterface;
+use App\Interfaces\Seller\Profile\SellerProfileRepositoryInterface;
 use App\Repository\Admin\Auth\AdminAuthRepository;
 use App\Repository\Admin\Auth\AdminForgetPasswordRepository;
 use App\Repository\Admin\Categories\CategoryRepository;
@@ -16,6 +17,7 @@ use App\Repository\Admin\Profile\AdminProfileRepository;
 use App\Repository\Admin\Settings\SettingRepository;
 use App\Repository\Seller\Auth\SellerAuthRepository;
 use App\Repository\Seller\Auth\SellerForgetPasswordRepository;
+use App\Repository\Seller\Profile\SellerProfileRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -32,6 +34,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
         $this->app->bind(SellerAuthRepositoryInterface::class, SellerAuthRepository::class);
         $this->app->bind(SellerForgetPasswordRepositoryInterface::class, SellerForgetPasswordRepository::class);
+        $this->app->bind(SellerProfileRepositoryInterface::class, SellerProfileRepository::class);
     }
 
     /**

@@ -14,7 +14,8 @@
 			</div>
 			<div class="menu-block customscroll">
 				<div class="sidebar-menu">
-					<ul id="accordion-menu">
+                    @if (auth()->guard('admin')->check())
+                    <ul id="accordion-menu">
 
 						<li>
 							<a href="{{ route('admin.home') }}" class="dropdown-toggle no-arrow @yield('home-active')">
@@ -64,6 +65,43 @@
 							</a>
 						</li>
 					</ul>
+                    @else
+                    <ul id="accordion-menu">
+
+						<li>
+							<a href="{{ route('seller.home') }}" class="dropdown-toggle no-arrow @yield('home-active')">
+								<span class="micon fa fa-home"></span
+								><span class="mtext">Home</span>
+							</a>
+						</li>
+						<li>
+							<a href="invoice.html" class="dropdown-toggle no-arrow">
+								<span class="micon bi bi-receipt-cutoff"></span
+								><span class="mtext">Invoice</span>
+							</a>
+						</li>
+						<li>
+							<div class="dropdown-divider"></div>
+						</li>
+						<li>
+							<div class="sidebar-small-cap">Settings</div>
+						</li>
+
+						<li>
+							<a
+								href="{{ route('seller.profile') }}"
+								class="dropdown-toggle no-arrow @yield('profile-active')"
+							>
+								<span class="micon fa fa-user"></span>
+								<span class="mtext"
+									>Profile
+								</span>
+							</a>
+						</li>
+
+					</ul>
+                    @endif
+
 				</div>
 			</div>
 		</div>

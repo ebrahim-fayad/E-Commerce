@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Seller\SellerController;
 use App\Http\Controllers\Seller\SellerForgetPasswordController;
+use App\Http\Controllers\Seller\SellerProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +36,11 @@ Route::prefix('seller/')->name('seller.')->group(function () {
             Route::get('home','index')->name('home');
             Route::post('logout','destroy')->name('logout');
         });
+        Route::controller(SellerProfileController::class)->group(function () {
+            Route::get('profile','profileView')->name('profile');
+            Route::post('change-profile-seller-picture','changeProfilePicture')->name('changeProfilePicture');
+        });
+
     });//end middleware seller Group
 });
 

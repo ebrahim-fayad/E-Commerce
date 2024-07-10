@@ -31,6 +31,7 @@ class Seller extends Authenticatable
         'payment_email',
         'verified',
        'status',
+       'picture',
     ];
     public function sluggable(): array
     {

@@ -16,7 +16,7 @@
 		<script src="{{ asset('extra-assets/ijaboCropTool/ijaboCropTool.min.js') }}"></script>
 		<script src="{{ asset('extra-assets/jquery-ui-1.13.2/jquery-ui.min.js') }}"></script>
 		<script src="{{ asset('extra-assets/summernote/summernote-bs4.min.js') }}"></script>
-
+@kropifyScripts
 <script>
     window.addEventListener('updateAdminInfo', event => {
         $('#adminProfileName').html(event.detail[0].adminName);
@@ -76,5 +76,16 @@
             timer: 1500
         });
     });
+    window.addEventListener('updateSellerPassword', event => {
+        Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "Seller Password  has been Updated successfully",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    });
+
 </script>
+
 @stack('scripts')
