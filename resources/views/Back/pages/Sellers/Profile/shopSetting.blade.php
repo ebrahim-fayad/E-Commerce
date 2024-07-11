@@ -65,17 +65,15 @@
 @endsection
 @push('scripts')
     <script>
-        $('input[type="file"][name="shop_logo"]').ijaboViewer({
-            preview:'img#shop_logo_preview',
-            imageShape:'square',
-            allowedExtensions:['png','jpg','svg'],
-            onErrorShape:function(message,element){
-                alert(message);
-            },
-            onInvalidType:function(message, element){
-                alert(message);
-            },
-            onSuccess:function(message, element){}
+        document.querySelector('input[type="file"][name="shop_logo"]').addEventListener('change', function(event) {
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.querySelector('#shop_logo_preview').src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
         });
     </script>
 @endpush

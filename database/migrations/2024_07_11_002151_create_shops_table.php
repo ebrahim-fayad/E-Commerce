@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
-            $table->integer('seller_id');
+            $table->foreignId('seller_id')->references('id')->on('sellers')->cascadeOnDelete();
             $table->string('shop_name')->nullable();
             $table->string('shop_phone')->nullable();
             $table->string('shop_address')->nullable();

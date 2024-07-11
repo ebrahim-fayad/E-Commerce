@@ -14,9 +14,16 @@
 						<div
 							class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
 						>
-							<a class="dropdown-item" href="{{ route('admin.profile') }}"
-								><i class="dw dw-user1"></i> Profile</a
-							>
+                        @if (auth()->guard('admin')->check())
+                        <a class="dropdown-item" href="{{ route('admin.profile') }}"
+                            ><i class="dw dw-user1"></i> Profile</a
+                        >
+                        @else
+                        <a class="dropdown-item" href="{{ route('seller.profile') }}"
+                            ><i class="dw dw-user1"></i> Profile</a
+                        >
+
+                        @endif
 							<a class="dropdown-item" href="profile.html"
 								><i class="dw dw-settings2"></i> Setting</a
 							>
