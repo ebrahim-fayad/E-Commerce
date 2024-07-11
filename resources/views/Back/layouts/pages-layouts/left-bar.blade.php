@@ -98,6 +98,17 @@
 								</span>
 							</a>
 						</li>
+						<li>
+							<a
+								href="{{ route('seller.shop-setting') }}"
+								class="dropdown-toggle no-arrow @yield('shop-active')"
+							>
+								<span class="micon bi bi-shop"></span>
+								<span class="mtext"
+									>Shop Setting
+								</span>
+							</a>
+						</li>
 
 					</ul>
                     @endif

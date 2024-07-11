@@ -39,6 +39,8 @@ Route::prefix('seller/')->name('seller.')->group(function () {
         Route::controller(SellerProfileController::class)->group(function () {
             Route::get('profile','profileView')->name('profile');
             Route::post('change-profile-seller-picture','changeProfilePicture')->name('changeProfilePicture');
+            Route::get('shop-setting','shopSetting')->name('shop-setting');
+            Route::post('shop-setup','shopSetup')->name('shop-setup');
         });
 
     });//end middleware seller Group
