@@ -13,7 +13,7 @@ class GeneralSetting extends Model
     public function getLogoAttribute($value)
     {
         if ($value) {
-            return asset('images/site/' . $value);
+            return asset("images/site/$value");
         } else {
             return asset('images/site/deskapp-logo.svg');
         }

@@ -61,10 +61,17 @@ class SellerTabs extends Component
                 }],
             'new_password'=>['required','min:5','confirmed'],
         ]);
-        $this->dispatch('updateSellerPassword');
         Mail::to($seller->email)->send(new SentSellerNewPassword($seller,$this->new_password));
         $seller->update(['password'=>Hash::make($this->new_password)]);
+        $this->showToastr('success', 'Password successfully changed.');
         $this->reset('current_password','new_password','new_password_confirmation');
+    }
+    public function showToastr($type, $message)
+    {
+        return $this->dispatch('showToastr', [
+            'type' => $type,
+            'message' => $message
+        ]);
     }
     public function render()
     {

@@ -4,6 +4,14 @@
 @section('content')
 <div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
     {{-- <x-alert.form-alert/> --}}
+        @if ( Session::get('success') )
+    <div class="alert alert-success">
+        {{ Session::get('success') }}
+        <button class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+   @endif
     <form action="{{ route('seller.shop-setup') }}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="row">

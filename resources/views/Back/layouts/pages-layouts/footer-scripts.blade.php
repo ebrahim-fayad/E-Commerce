@@ -16,12 +16,22 @@
 		<script src="{{ asset('extra-assets/ijaboCropTool/ijaboCropTool.min.js') }}"></script>
 		<script src="{{ asset('extra-assets/jquery-ui-1.13.2/jquery-ui.min.js') }}"></script>
 		<script src="{{ asset('extra-assets/summernote/summernote-bs4.min.js') }}"></script>
+
 @kropifyScripts
 <script>
     window.addEventListener('updateAdminInfo', event => {
         $('#adminProfileName').html(event.detail[0].adminName);
         $('#adminProfileEmail').html(event.detail[0].adminEmail);
     });
+		window.addEventListener('showToastr', function(event){
+                  toastr.remove();
+				  if( event.detail[0].type === 'info' ){ toastr.info(event.detail[0].message); }
+				  else if( event.detail[0].type === 'success' ){ toastr.success(event.detail[0].message); }
+				  else if( event.detail[0].type === 'error' ){ toastr.error(event.detail[0].message); }
+				  else if( event.detail[0].type === 'warning' ){ toastr.warning(event.detail[0].message); }
+				  else{ return false; }
+			});
+
     window.addEventListener('successFlash', event => {
         Swal.fire({
             position: "top-end",

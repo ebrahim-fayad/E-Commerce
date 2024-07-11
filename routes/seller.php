@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Seller\Products\ProductController;
 use App\Http\Controllers\Seller\SellerController;
 use App\Http\Controllers\Seller\SellerForgetPasswordController;
 use App\Http\Controllers\Seller\SellerProfileController;
@@ -41,6 +42,21 @@ Route::prefix('seller/')->name('seller.')->group(function () {
             Route::post('change-profile-seller-picture','changeProfilePicture')->name('changeProfilePicture');
             Route::get('shop-setting','shopSetting')->name('shop-setting');
             Route::post('shop-setup','shopSetup')->name('shop-setup');
+        });
+        /*============================ Product Routes====================================*/
+        Route::prefix('product')->name('product.')->group(function () {
+            Route::controller(ProductController::class)->group(function () {
+                Route::get('/all', 'allProducts')->name('all-products');
+                Route::get('/add', 'addProduct')->name('add-product');
+                Route::get('/get-product-category', 'getProductCategory')->name('get-product-category');
+                Route::post('/create', 'createProduct')->name('create-product');
+                Route::get('/edit', 'editProduct')->name('edit-product');
+                Route::post('/update', 'updateProduct')->name('update-product');
+                Route::post('/upload-images', 'uploadProductImages')->name('upload-images');
+                Route::get('/get-product-images', 'getProductImages')->name('get-product-images');
+                Route::post('/delete-product-image', 'deleteProductImage')->name('delete-product-image');
+                Route::post('/delete-product', 'deleteProduct')->name('delete-product');
+            });
         });
 
     });//end middleware seller Group

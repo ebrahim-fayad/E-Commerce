@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="{{ asset('extra-assets/jquery-ui-1.13.2/jquery-ui.structure.min.css') }}">
 <link rel="stylesheet" href="{{ asset('extra-assets/jquery-ui-1.13.2/jquery-ui.theme.min.css') }}">
 <link rel="stylesheet" href="{{ asset('back/sweet-alert.min.css') }}">
+<link rel="stylesheet" href="{{ asset('extra-assets/summernote/summernote-bs4.min.css') }}">
 <script>
     (function(w, d, s, l, i) {
         w[l] = w[l] || [];

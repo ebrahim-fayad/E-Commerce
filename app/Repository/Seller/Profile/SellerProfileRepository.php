@@ -92,6 +92,7 @@ class SellerProfileRepository implements SellerProfileRepositoryInterface
            'shop_name' => $request->shop_name,
            'shop_phone' => $request->shop_phone,
            'shop_description' => $request->shop_description,
+           'shop_address' => $request->shop_address,
             'shop_logo' => $logo_name != null ? $logo_name : $old_logo_name
         ]);
         return redirect()->route('seller.shop-setting')->with('success', 'Shop settings updated successfully.');
