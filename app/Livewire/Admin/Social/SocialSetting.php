@@ -28,7 +28,14 @@ class SocialSetting extends Component
             'linkedin_url'=>$this->linkedin_url,
             'github_url'=>$this->github_url,
         ]);
-        $this->dispatch('socialNetworkUpdate');
+        $this->showToastr('success','Social Network updated successfully');
+    }
+    public function showToastr($type, $message)
+    {
+        return $this->dispatch('showToastr', [
+            'type' => $type,
+            'message' => $message
+        ]);
     }
     public function render()
     {

@@ -63,7 +63,7 @@ class SettingsTabs extends Component
                 File::delete(public_path($path . $old_logos));
             }
             $this->general_settings->update(['logo'=>$filename]);
-            $this->dispatch('settingsUpdating');
+            $this->showToastr('success','Logo saved successfully');
 
             $this->reset('logo');
         }else{
@@ -87,7 +87,7 @@ class SettingsTabs extends Component
                 File::delete(public_path($path . $old_favicons));
             }
             $this->general_settings->update(['site_favicon'=>$filename]);
-            $this->dispatch('settingsUpdating');
+            $this->showToastr('success','favicon updated successfully');
 
             $this->reset('favicon');
         }else{
@@ -96,6 +96,13 @@ class SettingsTabs extends Component
             ]);
         }
         // dd('test');
+    }
+    public function showToastr($type, $message)
+    {
+        return $this->dispatch('showToastr', [
+            'type' => $type,
+            'message' => $message
+        ]);
     }
     public function render()
     {

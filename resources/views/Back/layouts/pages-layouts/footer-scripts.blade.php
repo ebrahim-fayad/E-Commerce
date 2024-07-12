@@ -32,69 +32,69 @@
 				  else{ return false; }
 			});
 
-    window.addEventListener('successFlash', event => {
-        Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Your Password has been updated  successfully",
-            showConfirmButton: false,
-            timer: 1500
-        });
-    });
-    window.addEventListener('settingsUpdating', event => {
-        Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Settings Updated Successfully",
-            showConfirmButton: false,
-            timer: 1500
-        });
-    });
-    window.addEventListener('socialNetworkUpdate', event => {
-        Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "SocialNetwork Updated Successfully",
-            showConfirmButton: false,
-            timer: 1500
-        });
-    });
-    window.addEventListener('updateCategoriesOrderingSuccess', event => {
-        Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Categories ordering have been successfully updated.",
-            showConfirmButton: false,
-            timer: 1500
-        });
-    });
-    window.addEventListener('c', event => {
-        Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Category  has been Deleted successfully",
-            showConfirmButton: false,
-            timer: 1500
-        });
-    });
-    window.addEventListener('deleteSubCategorySuccess', event => {
-        Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "SubCategory  has been Deleted successfully",
-            showConfirmButton: false,
-            timer: 1500
-        });
-    });
-    window.addEventListener('updateSellerPassword', event => {
-        Swal.fire({
-            position: "top-end",
-            icon: "error",
-            title: "Seller Password  has been Updated successfully",
-            showConfirmButton: false,
-            timer: 1500
-        });
-    });
+    // window.addEventListener('successFlash', event => {
+    //     Swal.fire({
+    //         position: "top-end",
+    //         icon: "success",
+    //         title: "Your Password has been updated  successfully",
+    //         showConfirmButton: false,
+    //         timer: 1500
+    //     });
+    // });
+    // window.addEventListener('settingsUpdating', event => {
+    //     Swal.fire({
+    //         position: "top-end",
+    //         icon: "success",
+    //         title: "Settings Updated Successfully",
+    //         showConfirmButton: false,
+    //         timer: 1500
+    //     });
+    // });
+    // window.addEventListener('socialNetworkUpdate', event => {
+    //     Swal.fire({
+    //         position: "top-end",
+    //         icon: "success",
+    //         title: "SocialNetwork Updated Successfully",
+    //         showConfirmButton: false,
+    //         timer: 1500
+    //     });
+    // });
+    // window.addEventListener('updateCategoriesOrderingSuccess', event => {
+    //     Swal.fire({
+    //         position: "top-end",
+    //         icon: "success",
+    //         title: "Categories ordering have been successfully updated.",
+    //         showConfirmButton: false,
+    //         timer: 1500
+    //     });
+    // });
+    // window.addEventListener('c', event => {
+    //     Swal.fire({
+    //         position: "top-end",
+    //         icon: "success",
+    //         title: "Category  has been Deleted successfully",
+    //         showConfirmButton: false,
+    //         timer: 1500
+    //     });
+    // });
+    // window.addEventListener('deleteSubCategorySuccess', event => {
+    //     Swal.fire({
+    //         position: "top-end",
+    //         icon: "success",
+    //         title: "SubCategory  has been Deleted successfully",
+    //         showConfirmButton: false,
+    //         timer: 1500
+    //     });
+    // });
+    // window.addEventListener('updateSellerPassword', event => {
+    //     Swal.fire({
+    //         position: "top-end",
+    //         icon: "error",
+    //         title: "Seller Password  has been Updated successfully",
+    //         showConfirmButton: false,
+    //         timer: 1500
+    //     });
+    // });
 
 </script>
 

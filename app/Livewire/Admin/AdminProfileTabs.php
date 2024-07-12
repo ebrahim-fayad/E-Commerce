@@ -43,7 +43,7 @@ class AdminProfileTabs extends Component
             'adminName' => $this->name,
             'adminEmail' => $this->email
             ]);
-        $this->showToastr('success','Password successfully changed.');
+        $this->showToastr('success','Personal Details successfully changed.');
         // return redirect()->route('admin.profile');
     }
     public function showToastr($type, $message)
@@ -70,8 +70,10 @@ class AdminProfileTabs extends Component
                         'current_password' => 'Current_Password is incorrect.',
                         ])->status(429);
                     }
-        // return redirect()->route('admin.profile');
-    }
+
+                    $this->showToastr('success','Password successfully changed.');
+                }
+
     public function render()
     {
         return view('livewire.admin.admin-profile-tabs');

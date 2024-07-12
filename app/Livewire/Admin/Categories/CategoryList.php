@@ -39,7 +39,7 @@ class CategoryList extends Component
                 'ordering' => $newPosition
             ]);
         }
-        $this->dispatch('updateCategoriesOrderingSuccess');
+        $this->showToastr('success','Category ordering updated successfully');
     }
     public function updateSubCategoriesOrdering($positions)
     {
@@ -49,7 +49,7 @@ class CategoryList extends Component
             SubCategory::where('id', $index)->update([
                 'ordering' => $newPosition
             ]);
-            $this->dispatch('updateCategoriesOrderingSuccess');
+            $this->showToastr('success','SubCategory ordering updated successfully');
         }
     }
     public function updateChildSubCategoriesOrdering($positions)
@@ -61,7 +61,7 @@ class CategoryList extends Component
                 'ordering' => $newPosition
             ]);
         }
-        $this->dispatch('updateCategoriesOrderingSuccess');
+        $this->showToastr('success','SubCategory ordering updated successfully');
     }
     public function deleteCategory($categoryId)
     {
@@ -69,11 +69,11 @@ class CategoryList extends Component
         $path = 'images/categories/';
         $category_image = $category->category_image;
         if (File::exists(public_path($path . $category_image))) {
-            File::delete($path . $category_image);
+            File::delete("$path$category_image");
         }
 
         //DELETE CATEGORY FROM DB
-        $this->dispatch('deleteSubCategorySuccess');
+        $this->showToastr('success','Category deleted successfully');
          $category->delete();
     }
     public function deleteSubCategory($subcategory_id)
@@ -85,9 +85,15 @@ class CategoryList extends Component
             }
         }
         $subcategory->delete();
-        $this->dispatch('deleteSubCategorySuccess');
+        $this->showToastr('success','SubCategory deleted successfully');
     }
-
+    public function showToastr($type, $message)
+    {
+        return $this->dispatch('showToastr', [
+            'type' => $type,
+            'message' => $message
+        ]);
+    }
 
     public function render()
     {
