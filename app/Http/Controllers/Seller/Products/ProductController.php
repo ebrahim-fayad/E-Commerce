@@ -33,4 +33,12 @@ class ProductController extends Controller
     {
         return $this->product->createProduct($request);
     } //End Method
+    public function editProduct($id)
+    {
+        return $this->product->editProduct($id);
+    }
+    public function updateProduct(SellerProductRequest $request,$id)
+    {
+        return $this->product->updateProduct($request,$id);
+    }
 }

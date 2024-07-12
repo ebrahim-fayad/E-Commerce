@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\SubCategory;
 use App\Rules\ValidatePrice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 class SellerProductRepository implements SellerProductRepositoryInterface
 {
     public function allProducts()
@@ -84,4 +85,53 @@ class SellerProductRepository implements SellerProductRepositoryInterface
         }
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function editProduct($id) {
+        $product = Product::findOrFail($id);
+        $categories = Category::orderBy('category_name', 'asc')->get();
+        $subcategories = SubCategory::where('category_id', $product->category)
+            ->where('is_child_of', 0)
+            ->orderBy('subcategory_name', 'asc')
+            ->get();
+        return view('Back.pages.Sellers.Products.edit-product', compact('product', 'categories','subcategories'));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function updateProduct($request, $id) {
+        $product = Product::findOrFail($id);
+        $product_image = $product->product_image;
+        if ($request->hasFile('product_image')) {
+            $path = 'images/products/';
+            $file = $request->file('product_image');
+            $old_product_image = $product->product_image;
+            $filename = 'PRODUCT_IMG_' . time(). uniqid(). '.'. $file->getClientOriginalExtension();
+            // $upload = $file->move(public_path($path), $filename);
+            $upload = $file->move(public_path($path), $filename);
+            if ($upload) {
+                if ($old_product_image != null && File::exists("$path$old_product_image")) {
+                    File::delete(public_path("$path$old_product_image"));
+                }
+                $product_image = $filename;
+            }
+        }
+
+        $product->name = $request->name;
+        $product->summary = $request->summary;
+        $product->category = $request->category;
+        $product->subcategory = $request->subcategory;
+        $product->price = $request->price;
+        $product->compare_price = $request->compare_price;
+        $product->product_image = $product_image;
+        $saved = $product->save();
+
+        if ($saved) {
+            return response()->json(['status' => 1, 'msg' => ' product has been successfully updated.']);
+        } else {
+            return response()->json(['status' => 0, 'msg' => 'Something went wrong.']);
+        }
+    }
 }

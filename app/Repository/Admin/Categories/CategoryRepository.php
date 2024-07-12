@@ -37,8 +37,8 @@ class CategoryRepository implements CategoryRepositoryInterface{
             $fileName = Str::slug($request->category_name) . time() . uniqid() . '.'.$image->getClientOriginalExtension();
             $upload = $image->storeAs('categories',$fileName,'upload_image');
             if ($upload) {
-                if ($oldPic != null && File::exists($path.$oldPic)) {
-                    File::delete(public_path($path . $oldPic));
+                if ($oldPic != null && File::exists("$path$oldPic")) {
+                    File::delete(public_path("$path$oldPic"));
                 }
             }
             $category->category_image = $fileName;

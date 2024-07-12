@@ -4,6 +4,10 @@ use App\Models\Category;
 use App\Models\GeneralSetting;
 use App\Models\SocialNetwork;
 
+class constDefaults
+{
+    const tokenExpiredMinutes = 15;
+}
 if (!function_exists('general_setting')) {
     function general_setting()
     {
@@ -25,7 +29,4 @@ if (!function_exists('categories')) {
         return $categories;
     }
 }
-class constDefaults
-{
-    const tokenExpiredMinutes = 15;
-}
+

@@ -32,6 +32,11 @@ class Product extends Model
             ]
         ];
     }
+
+    public function subCategory()
+    {
+        return $this->belongsTo(SubCategory::class, 'subcategory');
+    }
     public function getProductImageAttribute($value)
     {
         if ($value) {

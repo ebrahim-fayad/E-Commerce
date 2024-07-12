@@ -22,15 +22,24 @@ class SellerProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-          'name' => 'required|unique:products,name',
+        $rules = [
+            'name' => "required|unique:products,name,{$this->id}",
             'summary' => 'required|min:1',
-            'product_image' => 'required|mimes:png,jpg,jpeg|max:1024',
             'category' => 'required|exists:categories,id',
             'subcategory' => 'required|exists:sub_categories,id',
             'price' => ['required', new ValidatePrice],
             'compare_price' => ['nullable', new ValidatePrice],
         ];
+
+        // Make product_image optional if editing
+        if ($this->isMethod('post')) {
+            $rules['product_image'] = 'required|mimes:png,jpg,jpeg|max:1024';
+        } elseif ($this->isMethod('put')) {
+            $rules['product_image'] = 'nullable|mimes:png,jpg,jpeg|max:1024';
+        }
+
+
+        return $rules;
     }
     public function messages(): array
     {
